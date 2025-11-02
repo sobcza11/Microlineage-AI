@@ -1,0 +1,13 @@
+# DriftOps-style policy gates
+min_forecast_mape: 0.85        # require ≤15% MAPE (1 - min_forecast_mape)
+max_drift_psi: 0.20            # flag if PSI > 0.2
+min_backtest_r2: 0.60
+
+pricing_bounds:
+  min_discount_pct: 0
+  max_discount_pct: 30
+  max_price_jump_pct: 12
+
+fairness:
+  monitor_groups: ["store_region","income_band"]
+  max_parity_diff: 0.10
