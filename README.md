@@ -1,7 +1,7 @@
 # MicroLineage AI
 
 <p align="center">
-  <img src="assets/main_phto.png" alt="MicroLineage AI Banner" width="100%">
+  <img src="_supporting/assets/main_phto.png" alt="MicroLineage AI Banner" width="100%">
 </p>
 
 # MicroLineage AI
