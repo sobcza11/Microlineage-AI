@@ -3,6 +3,10 @@ on:
   push:
   pull_request:
 
+defaults:
+  run:
+    working-directory: _supporting
+
 jobs:
   build-test-gate:
     runs-on: ubuntu-latest
@@ -11,7 +15,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          
+
       - name: Install
         run: |
           python -m pip install --upgrade pip
@@ -30,3 +34,6 @@ jobs:
 
       - name: Policy gate
         run: python -c "from _supporting.src.monitoring.gates import validate_against_policy as v; v('artifacts/metrics.json','_supporting/policy.yaml')" 
+
+      - name: Policy gate
+        run: [![CI](https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml?query=branch%3Amain)

@@ -16,7 +16,12 @@ Forecast SKU-level demand from POS + external signals (weather, events, mobility
 - Governance: drift (PSI/KS), SHAP/LIME, policy gates
 - Delivery: FastAPI service + Dashboard
 
-[![CI](https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/sobcza11/Microlineage-AI/actions)
+<p align="center">
+  <a href="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml?query=branch%3Amain">
+    <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg?branch=main"
+         alt="CI Status">
+  </a>
+</p>
 
 ## Dev quickstart
 ```bash
