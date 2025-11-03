@@ -4,7 +4,7 @@
   <img src="_supporting/assets/main_phto.png" alt="MicroLineage AI Banner" width="100%">
 </p>
 
-# MicroLineage AI
+# `Micro`Lineage AI
 
 **Economy 4.0** forecasting & optimization, **governed by DriftOps principles**.  
 
