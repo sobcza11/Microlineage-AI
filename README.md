@@ -5,6 +5,7 @@
 </p>
 
 # MicroLineage AI
+---
 
 
 **Economy 4.0** forecasting & optimization, **governed by DriftOps principles**.  
@@ -17,14 +18,14 @@ I **forge SKU-level demand vision**, synthesizing the essence of Point-of-Sale d
 
 *Ce Stratégique* rests upon "**Policy-as-Code**", a **fundamental commitment** that **transmutes the chaotic swell of data** into **reliable, governed strategic light**, imposing non-negotiable standards for explainability, drift, and secure deployment at the enterprise scale
 
-
-
+---
 
 **Highlights**
 - Time-series: ARIMA • Prophet • LSTM/GRU (extensible)
 - Optimization: pricing & replenishment (linear/integer programming)
 - Governance: drift (PSI/KS), SHAP/LIME, policy gates
 - Delivery: FastAPI service + Dashboard
+---
 
 ## Dev quickstart
 ```bash
