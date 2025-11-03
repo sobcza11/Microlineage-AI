@@ -8,9 +8,9 @@
 
 **Economy 4.0** forecasting and optimization are orchestrated and governed by the rigorous principles of DriftOps.
 
-I **forge SKU-level demand vision**, synthesizing the essence of Point-of-Sale data with the vast **external symphony** of **exogenous signals**—*weather, mobility, events, and web trends*—to **assure unshakeable revenue predictability**.
+I **forge SKU-level demand vision**, synthesizing the essence of Point-of-Sale data with the vast **external symphony** of **exogenous signals**—*weather, mobility, events, & web trends*—to **assure unshakeable revenue predictability**.
 
-*Ce Stratégique* rests upon "**Policy-as-Code**", a **fundamental commitment** that **transmutes the chaotic swell of data** into **reliable, governed strategic light**, imposing non-negotiable standards for explainability, drift, and secure deployment at the enterprise scale
+*Ce Stratégique* rests upon "**Policy-as-Code**", a **fundamental commitment** that **transmutes the chaotic swell of data** into **reliable, governed strategic light**, imposing non-negotiable standards for explainability, drift, & secure deployment at the enterprise scale
 
 ----
 
