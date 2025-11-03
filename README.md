@@ -1,4 +1,4 @@
-# MicroLineage AI
+# `Micro`Lineage AI
 
 <p align="center">
   <img src="_supporting/assets/main_phto.png" alt="MicroLineage AI Banner" width="100%">
