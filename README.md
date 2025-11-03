@@ -7,6 +7,7 @@
 # MicroLineage AI
 
 **Economy 4.0** forecasting & optimization, **governed by DriftOps principles**.  
+
 Forecast SKU-level demand from POS + external signals (weather, events, mobility, web trends) and enforce **policy-as-code** for explainability, drift, and deployment.
 
 
