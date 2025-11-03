@@ -14,7 +14,7 @@ I **forge SKU-level demand vision**, synthesizing the essence of Point-of-Sale d
 
 ----
 
-**Highlights**
+# **Highlights**
 - Time-series: ARIMA • Prophet • LSTM/GRU (extensible)
 - Optimization: pricing & replenishment (linear/integer programming)
 - Governance: drift (PSI/KS), SHAP/LIME, policy gates
