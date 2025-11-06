@@ -5,11 +5,10 @@
 <h1 align="center">MicroLineage AI</h1>
 
 <p align="center">
-  <a href="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml?query=branch%3Amain">
-    <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI Status">
+  <a href="https://github.com/sobcza11/Microlineage-AI/actions">
+    <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg" />
   </a>
 </p>
-
 ---
 
 **Economy 4.0** forecasting & optimization governed by **DriftOps** principles.  
