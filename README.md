@@ -5,9 +5,8 @@
 <h1 align="center"><code>Micro</code>Lineage AI</h1>
 
 <p align="center">
-  <strong>CI Status</strong><br>
-  <a href="https://github.com/sobcza11/Microlineage-AI/actions">
-    <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI Status Badge">
+  <a href="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml">
+    <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg?branch=main" alt="Build status" />
   </a>
 </p>
 
