@@ -2,21 +2,19 @@
   <img src="_supporting/assets/main_phto.png" alt="MicroLineage AI Banner" width="600" height="600">
 </p>
 
-<h1 align="center">MicroLineage AI</h1>
+<h1 align="center">
+  <span style="background-color:#f0f0f0; padding:4px 8px; border-radius:6px;">Micro</span>Lineage AI
+</h1>
 
 <p align="center">
-  <strong>CI Status</strong><br>
   <a href="https://github.com/sobcza11/Microlineage-AI/actions">
     <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI Status Badge">
   </a>
 </p>
 
----
-
 **Economy 4.0** forecasting & optimization governed by **DriftOps** principles.  
 Forecast SKU-level demand from POS + external signals (weather, events, mobility, web trends)  
 and enforce **policy-as-code** for explainability, drift, and deployment integrity.
-
 ---
 
 ## 🧭 Overview
