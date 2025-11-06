@@ -7,14 +7,18 @@
 </h1>
 
 <p align="center">
+  <strong>CI Status</strong><br>
   <a href="https://github.com/sobcza11/Microlineage-AI/actions">
     <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI Status Badge">
   </a>
 </p>
 
+---
+
 **Economy 4.0** forecasting & optimization governed by **DriftOps** principles.  
 Forecast SKU-level demand from POS + external signals (weather, events, mobility, web trends)  
 and enforce **policy-as-code** for explainability, drift, and deployment integrity.
+
 ---
 
 ## 🧭 Overview
