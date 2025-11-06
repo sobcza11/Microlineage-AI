@@ -10,6 +10,8 @@
   </a>
 </p>
 
+---
+
 **Economy 4.0** forecasting & optimization governed by **DriftOps** principles.  
 Forecast SKU-level demand from POS + external signals (weather, events, mobility, web trends)  
 and enforce **policy-as-code** for explainability, drift, and deployment integrity.
@@ -17,15 +19,15 @@ and enforce **policy-as-code** for explainability, drift, and deployment integri
 ---
 
 ## 🧭 Overview
-MicroLineage AI extends the **DriftOps governance framework** into retail and economic forecasting.  
+**MicroLineage AI** extends the *DriftOps governance framework* into retail and economic forecasting.  
 It fuses time-series modeling, optimization, and explainable AI to help organizations translate data lineage  
 into **market lineage** — ensuring transparent, measurable value in **Economy 4.0**.
 
-**Core Goals**
-- Forecast hyper-local demand at SKU or neighborhood level.  
-- Automate pricing, replenishment, and scenario simulations.  
-- Maintain full data + model lineage across CI/CD pipelines.  
-- Audit fairness, drift, and ROI continuously with policy gates.  
+### 🎯 Core Goals
+- Forecast hyper-local demand at SKU or neighborhood level  
+- Automate pricing, replenishment, and scenario simulations  
+- Maintain full data + model lineage across CI/CD pipelines  
+- Audit fairness, drift, and ROI continuously with policy gates  
 
 ---
 
@@ -34,7 +36,9 @@ Microlineage-AI/
 │
 ├── LICENSE
 ├── README.md
-├── .github/workflows/ci.yml
+├── .github/
+│ └── workflows/
+│ └── ci.yml
 └── _supporting/
 ├── src/
 │ ├── api/app.py
@@ -48,12 +52,11 @@ Microlineage-AI/
 ├── pyproject.toml
 └── tests/test_smoke.py
 
-yaml
-Copy code
 
 ---
 
-## 🚀 Dev quickstart
+## 🚀 Dev Quickstart
+
 ```bash
 cd _supporting
 python -m pip install --upgrade pip
@@ -62,3 +65,5 @@ pip install -e .
 uvicorn src.api.app:app --reload
 # Run Dashboard
 streamlit run dashboard/app.py
+
+
