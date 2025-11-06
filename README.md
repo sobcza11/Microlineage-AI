@@ -2,7 +2,7 @@
   <img src="_supporting/assets/main_phto.png" alt="MicroLineage AI Banner" width="600" height="600">
 </p>
 
-<h1 align="center">`Micro`Lineage AI</h1>
+<h1 align="center"><code>Micro</code>Lineage AI</h1>
 
 <p align="center">
   <strong>CI Status</strong><br>
