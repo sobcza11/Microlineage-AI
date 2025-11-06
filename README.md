@@ -1,37 +1,59 @@
-# `Micro`Lineage AI
-
 <p align="center">
-  <img src="_supporting/assets/main_phto.png" alt="MicroLineage AI Banner" width="400" height="400">
+  <img src="_supporting/assets/main_phto.png" alt="MicroLineage AI Banner" width="600" height="600">
 </p>
 
-<<<<<<< HEAD
-# `Micro`Lineage AI
-=======
 <h1 align="center">MicroLineage AI</h1>
 
-# MicroLineage AI
->>>>>>> 8c9d8fd (docs: resize README banner to 400x400 and clean header)
+<p align="center">
+  <a href="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml?query=branch%3Amain">
+    <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI Status">
+  </a>
+</p>
 
-**Economy 4.0** forecasting and optimization are orchestrated and governed by the rigorous principles of DriftOps.
+**Economy 4.0** forecasting & optimization governed by **DriftOps** principles.  
+Forecast SKU-level demand from POS + external signals (weather, events, mobility, web trends)  
+and enforce **policy-as-code** for explainability, drift, and deployment integrity.
 
-I **forge SKU-level demand vision**, synthesizing the essence of Point-of-Sale data with the vast **external symphony** of **exogenous signals**—*weather, mobility, events, & web trends*—to **assure unshakeable revenue predictability**.
+---
 
-*Ce Stratégique* rests upon "**Policy-as-Code**", a **fundamental commitment** that **transmutes the chaotic swell of data** into **reliable, governed strategic light**, imposing non-negotiable standards for explainability, drift, & secure deployment at the enterprise scale
+## 🧭 Overview
+MicroLineage AI extends the **DriftOps governance framework** into retail and economic forecasting.  
+It fuses time-series modeling, optimization, and explainable AI to help organizations translate data lineage  
+into **market lineage** — ensuring transparent, measurable value in **Economy 4.0**.
 
-<<<<<<< HEAD
-----
+**Core Goals**
+- Forecast hyper-local demand at SKU or neighborhood level.  
+- Automate pricing, replenishment, and scenario simulations.  
+- Maintain full data + model lineage across CI/CD pipelines.  
+- Audit fairness, drift, and ROI continuously with policy gates.  
 
-# **Highlights**
-- **Time-series**: ARIMA • Prophet • LSTM/GRU (extensible)
-- **Optimization**: pricing & replenishment (linear/integer programming)
-- **Governance**: drift (PSI/KS), SHAP/LIME, policy gates
-- **Delivery**: FastAPI service + Dashboard
-----
-=======
+---
 
->>>>>>> 8c9d8fd (docs: resize README banner to 400x400 and clean header)
+## ⚙️ Architecture Snapshot
+Microlineage-AI/
+│
+├── LICENSE
+├── README.md
+├── .github/workflows/ci.yml
+└── _supporting/
+├── src/
+│ ├── api/app.py
+│ ├── models/
+│ ├── optimization/
+│ ├── monitoring/gates.py
+│ └── ui/
+├── dashboard/app.py
+├── assets/main_phto.png
+├── policy.yaml
+├── pyproject.toml
+└── tests/test_smoke.py
 
-## Dev quickstart
+yaml
+Copy code
+
+---
+
+## 🚀 Dev quickstart
 ```bash
 cd _supporting
 python -m pip install --upgrade pip
@@ -40,4 +62,3 @@ pip install -e .
 uvicorn src.api.app:app --reload
 # Run Dashboard
 streamlit run dashboard/app.py
-
