@@ -1,0 +1,5 @@
+horizon: 14
+folds: 4
+min_history_days: 120
+agg: "D"
+season: 7

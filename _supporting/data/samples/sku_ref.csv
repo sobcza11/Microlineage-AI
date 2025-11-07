@@ -1,0 +1,3 @@
+store_id,sku_id,category,brand,size,cost
+1,101,Beverages,BrandA,500ml,1.2
+1,102,Beverages,BrandB,330ml,0.8

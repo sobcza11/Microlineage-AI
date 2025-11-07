@@ -6,13 +6,13 @@
 
 <p align="center">
   <a href="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml">
-    <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg?branch=main" alt="Build status" />
+    <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg" alt="CI Status">
   </a>
 </p>
 
 ---
 
-**Economy 4.0** forecasting & optimization governed by **DriftOps** principles.  
+**Economy <code>4.0</code>** forecasting & optimization governed by **DriftOps** principles.  
 Forecast SKU-level demand from POS + external signals (weather, events, mobility, web trends)  
 and enforce **policy-as-code** for explainability, drift, and deployment integrity.
 

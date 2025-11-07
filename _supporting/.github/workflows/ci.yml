@@ -1,0 +1,47 @@
+@"
+name: CI
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-gate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: _supporting
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install pytest
+
+      - name: Unit tests
+        run: pytest
+
+      - name: Seed demo metrics
+        run: |
+          mkdir -p artifacts
+          echo '{ "backtest_r2": 0.68, "mape": 0.12, "psi": 0.08 }' > artifacts/metrics.json
+
+      - name: Policy gate
+        run: |
+          python - <<'PY'
+          from src.monitoring.gates import validate_against_policy as v
+          v(metrics_path="artifacts/metrics.json", policy_path="policy.yaml")
+          PY
+"@ | Set-Content -Encoding UTF8 ".github/workflows/ci.yml"
+
