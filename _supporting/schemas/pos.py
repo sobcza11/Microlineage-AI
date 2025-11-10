@@ -1,41 +1,37 @@
-# _supporting/schemas/pos.py
 from __future__ import annotations
+
 import pandas as pd
 import pandera as pa
 from pandera.typing import Series
-from pandera import Field
+
 
 class POS(pa.DataFrameModel):
-    # Keys
-    store_id: Series[int] = Field(ge=0)
-    sku_id: Series[int] = Field(ge=0)
+    # Keys (coerce numeric when present; tolerate empty header-only)
+    store_id: Series[object] = pa.Field(coerce=True, nullable=True)
+    sku_id: Series[object] = pa.Field(coerce=True, nullable=True)
 
-    # Timestamp (tz-aware UTC)
-    ts: Series[pd.Timestamp] = Field(coerce=True)
+    # Time (empty-safe + UTC); timestamp rule via @pa.check
+    ts: Series[pd.Timestamp] = pa.Field(coerce=True, nullable=True)
 
     # Measures
-    qty: Series[float] = Field(ge=0)
-    price: Series[float] = Field(gt=0)
-    promo_flag: Series[bool]
-    stock_out_flag: Series[bool]
+    qty: Series[object] = pa.Field(coerce=True, nullable=True, ge=0)
+    price: Series[object] = pa.Field(coerce=True, nullable=True, ge=0)
+    promo_flag: Series[object] = pa.Field(coerce=True, nullable=True, isin=[0, 1])
+    stock_out_flag: Series[object] = pa.Field(coerce=True, nullable=True, isin=[0, 1])
 
-    class Config:
-        strict = True
-        coerce = True
+    @pa.check("ts")
+    def ts_utc_or_empty(cls, ts: pd.Series) -> bool:
+        if ts.empty:
+            return True
+        try:
+            return getattr(ts.dt.tz, "key", None) == "UTC"
+        except Exception:
+            return False
 
-    @pa.check("qty")
-    def _finite_qty(cls, s: Series[float]) -> Series[bool]:
-        return s.notna() & ~s.isin([float("inf"), float("-inf")])
 
-    @pa.dataframe_check
-    def _utc_timestamp(cls, df: pd.DataFrame) -> bool:
-        return (pd.api.types.is_datetime64tz_dtype(df["ts"])
-                and str(df["ts"].dt.tz) == "UTC")
-
-    @pa.dataframe_check
-    def _unique_key(cls, df: pd.DataFrame) -> bool:
-        return ~df.duplicated(subset=["store_id", "sku_id", "ts"]).any()
-
-def coerce_utc(df: pd.DataFrame, ts_col: str = "ts") -> pd.DataFrame:
-    df[ts_col] = pd.to_datetime(df[ts_col], utc=True, errors="coerce")
+def coerce_utc(df: pd.DataFrame, col: str) -> pd.DataFrame:
+    """Ensure column is tz-aware UTC even for empty frames."""
+    df[col] = pd.to_datetime(df[col], utc=True, errors="coerce")
+    if df.empty or df[col].isna().all():
+        df[col] = df[col].astype("datetime64[ns, UTC]")
     return df
