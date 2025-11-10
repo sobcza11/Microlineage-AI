@@ -1,0 +1,12 @@
+# Ignore common junk
+.venv/
+venv/
+env/
+**/.venv/**
+**/site-packages/**
+.git/
+.pytest_cache/
+.mypy_cache/
+build/
+dist/
+node_modules/
