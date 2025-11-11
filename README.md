@@ -1,5 +1,18 @@
 <p align="center">
-  <img src="_supporting/assets/main_phto.png" alt="MicroLineage AI Banner" width="600" height="600">
+  <div style="
+    display: inline-block;
+    border: 8px solid #8B5A2B;        /* deep brown wood tone */
+    border-radius: 12px;              /* softened corners */
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);  /* subtle depth */
+    background-color: #F5DEB3;        /* light wheat background for contrast */
+    padding: 6px;                     /* frame spacing */
+  ">
+    <img src="_supporting/assets/main_phto.png"
+         alt="MicroLineage AI Banner"
+         width="600"
+         height="600"
+         style="border-radius: 8px; display: block;">
+  </div>
 </p>
 
 <h1 align="center"><code>Micro</code>Lineage AI</h1>
