@@ -1,16 +1,17 @@
 <p align="center">
-  <table style="margin: auto; border: 6px solid #8B5A2B; border-radius: 12px; background-color: #F5DEB3;">
-    <tr>
-      <td style="padding: 6px; border-radius: 8px;">
-        <img src="_supporting/assets/main_phto.png"
-             alt="MicroLineage AI Banner"
-             width="600"
-             height="600"
-             style="display: block; border-radius: 8px;">
-      </td>
-    </tr>
-  </table>
+  <img src="_supporting/assets/main_phto.png" alt="MicroLineage AI Banner" width="600" height="600">
 </p>
+
+<h1 align="center"><code>Micro</code>Lineage AI</h1>
+
+<p align="center">
+  <a href="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml">
+    <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg" alt="CI Status">
+  </a>
+  <br>
+  <em>Economy 4.0 Forecasting & Governance Framework</em>
+</p>
+
 ---
 
 **MicroLineage-AI** explores how localized data ecosystems reshape **economic forecasting** in the **Economy 4.0** era.  
