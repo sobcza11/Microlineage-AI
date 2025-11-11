@@ -8,62 +8,17 @@
   <a href="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml">
     <img src="https://github.com/sobcza11/Microlineage-AI/actions/workflows/ci.yml/badge.svg" alt="CI Status">
   </a>
+  <br>
+  <em>Economy 4.0 Forecasting & Governance Framework</em>
 </p>
 
 ---
 
-**Economy <code>4.0</code>** forecasting & optimization governed by **DriftOps** principles.  
-Forecast SKU-level demand from POS + external signals (weather, events, mobility, web trends)  
-and enforce **policy-as-code** for explainability, drift, and deployment integrity.
+**MicroLineage-AI** explores how localized data ecosystems reshape **economic forecasting** in the **Economy 4.0** era.  
+By combining real-time POS data, external context (weather & mobility), and machine-learning forecasting,  
+it models supply-demand dynamics at the neighborhood level.  
+The framework functions as a **digital twin for micro-economies**, quantifying price elasticity, consumption resilience, and demand drift across local markets.  
+This system demonstrates how AI-driven micro-analytics can inform fiscal planning & private-sector agility — translating raw data into **signal économique**.
 
 ---
-
-## 🧭 Overview
-**MicroLineage AI** extends the *DriftOps governance framework* into retail and economic forecasting.  
-It fuses time-series modeling, optimization, and explainable AI to help organizations translate data lineage  
-into **market lineage** — ensuring transparent, measurable value in **Economy 4.0**.
-
-### 🎯 Core Goals
-- Forecast hyper-local demand at SKU or neighborhood level  
-- Automate pricing, replenishment, and scenario simulations  
-- Maintain full data + model lineage across CI/CD pipelines  
-- Audit fairness, drift, and ROI continuously with policy gates  
-
----
-
-## ⚙️ Architecture Snapshot
-Microlineage-AI/
-│
-├── LICENSE
-├── README.md
-├── .github/
-│ └── workflows/
-│ └── ci.yml
-└── _supporting/
-├── src/
-│ ├── api/app.py
-│ ├── models/
-│ ├── optimization/
-│ ├── monitoring/gates.py
-│ └── ui/
-├── dashboard/app.py
-├── assets/main_phto.png
-├── policy.yaml
-├── pyproject.toml
-└── tests/test_smoke.py
-
-
----
-
-## 🚀 Dev Quickstart
-
-```bash
-cd _supporting
-python -m pip install --upgrade pip
-pip install -e .
-# Run API
-uvicorn src.api.app:app --reload
-# Run Dashboard
-streamlit run dashboard/app.py
-
 
