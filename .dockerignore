@@ -1,0 +1,14 @@
+$DOCKERIGNORE = @"
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+.git/
+.gitattributes
+.gitignore
+_supporting/data/raw/
+mlruns/
+*.ipynb
+"@
+$DOCKERIGNORE | Out-File -FilePath .dockerignore -Encoding ascii -Force

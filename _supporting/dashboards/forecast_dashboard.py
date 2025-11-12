@@ -31,15 +31,14 @@ with col1:
     st.subheader("Forecast vs Actual")
     fig1 = px.line(forecast_sel, x="date", y=["forecast", "actual"],
                    labels={"value":"Units"}, markers=True)
-    st.plotly_chart(fig1, use_container_width=True)
+    st.plotly_chart(fig1, width="stretch")
 
 with col2:
     st.subheader("Optimized Margin by SKU")
     fig2 = px.bar(opt_sel, x="date", y="optimized_margin",
                   color="optimized_price", labels={"optimized_margin":"Margin ($)"})
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, width="stretch")
 
 st.markdown("---")
 st.metric("Overall PSI Drift", "0.037", delta="PASS")
 st.caption("Governed under CPMAI Phase VI Policy Gate • Streamlit build v1.0")
-

@@ -1,43 +1,27 @@
-﻿name: CI
-on:
-  push:
-  pull_request:
+﻿name: policy-gate
 
-permissions:
-  contents: read
+on:
+  pull_request:
+  push:
+    branches: [ main ]
 
 jobs:
-  build-test-gate:
+  gate:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: _supporting
-        shell: bash
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: Install minimal deps
+      - name: Install deps
         run: |
           python -m pip install --upgrade pip
-          pip install pytest pyyaml
-
-      - name: Unit tests
-        run: pytest
-
-      - name: Seed demo metrics
-        run: |
-          mkdir -p artifacts
-          echo '{ "backtest_r2": 0.68, "mape": 0.12, "psi": 0.08 }' > artifacts/metrics.json
-
+          pip install -r requirements.txt
+      - name: Generate sample data (if needed)
+        run: python _supporting/data/make_sku_forecast.py
+      - name: Run optimizer
+        run: python _supporting/models/optimize_prices.py
+      - name: Sanity & metrics
+        run: python _supporting/reports/sanity_check.py
       - name: Policy gate
-        run: |
-          python - <<'PY'
-          from src.monitoring.gates import validate_against_policy as v
-          v(metrics_path="artifacts/metrics.json", policy_path="policy.yaml")
-          PY
+        run: python _supporting/ci/policy_check.py

@@ -1,0 +1,12 @@
+# build + env
+.venv/
+mlruns/
+mlflow.db
+
+# data outputs
+_supporting/data/processed/*.csv
+_supporting/data/processed/metrics.json
+
+# caches
+__pycache__/
+*.py[cod]

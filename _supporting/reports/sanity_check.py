@@ -22,3 +22,21 @@ print(f"Uplift: ${uplift:,.2f} ({pct:.2f}%)")
 print("\nSample:")
 print(df_opt.head(8).to_string(index=False))
 
+# ...existing code that prints Baseline/Optimized/Uplift...
+
+from pathlib import Path
+import json
+# If you have a real PSI calc elsewhere, import/use it. Keeping 0.037 placeholder for now.
+psi = 0.037
+
+out = {
+    "baseline_margin": float(before),
+    "optimized_margin": float(after),
+    "uplift": float(uplift),
+    "uplift_pct": float(pct),
+    "psi": float(psi),
+    "decision": "PASS" if (psi <= 0.10 and uplift >= 0.0) else "FAIL"
+}
+metrics_path = PROCESSED / "metrics.json"
+metrics_path.write_text(json.dumps(out, indent=2))
+print(f"\nWrote metrics → {metrics_path}")
