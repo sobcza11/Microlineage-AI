@@ -1,4 +1,8 @@
-import json, pathlib, yaml
+import json
+import pathlib
+
+import yaml
+
 
 def validate_against_policy(metrics_path="artifacts/metrics.json", policy_path="policy.yaml"):
     pol = yaml.safe_load(open(policy_path))

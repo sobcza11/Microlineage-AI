@@ -16,9 +16,8 @@ import argparse
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Dict
 
 import pandas as pd
 
@@ -32,8 +31,8 @@ except Exception:
 
 # --- Import schemas from _supporting
 from _supporting.schemas.pos import POS, coerce_utc
-from _supporting.schemas.weather import Weather
 from _supporting.schemas.ref import SKURef
+from _supporting.schemas.weather import Weather
 
 
 # ---------- I/O helpers ----------
@@ -50,7 +49,7 @@ def _read_table(path: str) -> pd.DataFrame:
         raise RuntimeError(f"Failed to load {p}: {e}") from e
 
 
-def _safe_write_json(obj: Dict, out_path: str) -> None:
+def _safe_write_json(obj: dict, out_path: str) -> None:
     """Atomically write JSON and log the absolute path."""
     out = Path(out_path).resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -64,7 +63,7 @@ def _safe_write_json(obj: Dict, out_path: str) -> None:
 
 
 # ---------- validators ----------
-def validate_pos(path: str) -> Dict:
+def validate_pos(path: str) -> dict:
     df = _read_table(path)
     df = coerce_utc(df, "ts")
     POS.validate(df)
@@ -78,7 +77,7 @@ def validate_pos(path: str) -> Dict:
     }
 
 
-def validate_weather(path: str) -> Dict:
+def validate_weather(path: str) -> dict:
     df = _read_table(path)
     if "ts" in df.columns:
         df["ts"] = pd.to_datetime(df["ts"], utc=True, errors="coerce")
@@ -91,7 +90,7 @@ def validate_weather(path: str) -> Dict:
     }
 
 
-def validate_sku_ref(path: str) -> Dict:
+def validate_sku_ref(path: str) -> dict:
     df = _read_table(path)
     SKURef.validate(df)
     return {
@@ -114,8 +113,8 @@ def main() -> int:
     # Explicitly log the out path we will use
     print(f"[validate] out = {args.out}")
 
-    report: Dict = {
-        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+    report: dict = {
+        "generated_at_utc": datetime.now(UTC).isoformat(),
         "status": "success",
         "checks": {},
     }

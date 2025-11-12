@@ -1,6 +1,8 @@
 from __future__ import annotations
+
 import numpy as np
 import pandas as pd
+
 
 class SeasonalNaive:
     name = "seasonal_naive"
@@ -8,7 +10,7 @@ class SeasonalNaive:
     def __init__(self, season: int = 7):
         self.season = season
 
-    def fit(self, y: pd.Series) -> "SeasonalNaive":
+    def fit(self, y: pd.Series) -> SeasonalNaive:
         self.y = y.astype(float)
         return self
 

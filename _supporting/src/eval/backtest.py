@@ -1,7 +1,9 @@
 from __future__ import annotations
-import argparse, json, os
+
+import argparse
+import json
+import os
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
 
 import numpy as np
 import pandas as pd
@@ -35,8 +37,8 @@ class BTConfig:
     season: int = 7  # for SeasonalNaive
 
     @classmethod
-    def from_yaml(cls, path: str) -> "BTConfig":
-        with open(path, "r", encoding="utf-8") as f:
+    def from_yaml(cls, path: str) -> BTConfig:
+        with open(path, encoding="utf-8") as f:
             raw = yaml.safe_load(f) or {}
         return cls(**{k: v for k, v in raw.items() if k in cls.__annotations__})
 
@@ -63,11 +65,11 @@ def make_series(df: pd.DataFrame, store_id: int, sku_id: int, agg: str) -> pd.Se
 
 
 # ---------- backtest core ----------
-def rolling_splits(y: pd.Series, cfg: BTConfig) -> List[Tuple[pd.DatetimeIndex, pd.DatetimeIndex]]:
+def rolling_splits(y: pd.Series, cfg: BTConfig) -> list[tuple[pd.DatetimeIndex, pd.DatetimeIndex]]:
     """Return list of (train_index, test_index) for expanding window + fixed horizon."""
     if len(y) < cfg.min_history_days:
         return []
-    splits: List[Tuple[pd.DatetimeIndex, pd.DatetimeIndex]] = []
+    splits: list[tuple[pd.DatetimeIndex, pd.DatetimeIndex]] = []
     train_end_idxs = np.linspace(cfg.min_history_days, len(y) - cfg.horizon, num=cfg.folds, dtype=int)
     for tei in train_end_idxs:
         train_idx = y.index[:tei]
@@ -77,7 +79,7 @@ def rolling_splits(y: pd.Series, cfg: BTConfig) -> List[Tuple[pd.DatetimeIndex, 
     return splits
 
 
-def run_backtest(y: pd.Series, cfg: BTConfig, out_dir: str, key: str) -> Dict:
+def run_backtest(y: pd.Series, cfg: BTConfig, out_dir: str, key: str) -> dict:
     models = [
         Naive(),
         SeasonalNaive(season=cfg.season),

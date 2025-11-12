@@ -1,13 +1,17 @@
 # _supporting/tools/gen_samples.py
 from __future__ import annotations
-import os, numpy as np, pandas as pd
-from datetime import datetime, timedelta, timezone
+
+import os
+from datetime import UTC, datetime, timedelta
+
+import numpy as np
+import pandas as pd
 
 ROOT = "_supporting/data/samples"
 os.makedirs(ROOT, exist_ok=True)
 
 # --- config ---
-start = datetime.now(timezone.utc) - timedelta(days=200)
+start = datetime.now(UTC) - timedelta(days=200)
 days = 180  # >= min_history_days (120) so backtest runs
 stores = [1]
 skus = [101, 102]  # two SKUs

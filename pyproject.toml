@@ -1,11 +1,28 @@
 ﻿[tool.ruff]
 target-version = "py311"
+line-length = 100
 extend-exclude = [
   ".venv", "venv", "env", "*/site-packages/*",
-  ".git", ".pytest_cache", ".mypy_cache", "build", "dist", "node_modules"
+  ".git", ".pytest_cache", ".mypy_cache", ".ruff_cache",
+  "build", "dist", "node_modules"
 ]
 
 [tool.ruff.lint]
-select = ["E","F","B","I"]
-extend-select = ["PL","UP","RUF"]
-ignore = []
+select = ["E","F","B","I","PL","UP","RUF"]
+ignore = ["E501","PLR2004","B007"]
+
+[tool.black]
+target-version = ["py311"]
+line-length = 100
+exclude = '''
+(
+  \.venv
+  | venv
+  | ^.*/site-packages/.*
+  | ^artifacts/.*
+  | ^build/.*
+  | ^dist/.*
+  | ^\.ruff_cache/.*
+  | ^\.pytest_cache/.*
+)
+'''

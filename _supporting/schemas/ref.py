@@ -1,8 +1,10 @@
 # _supporting/schemas/ref.py
 from __future__ import annotations
+
 import pandera as pa
-from pandera.typing import Series
 from pandera import Field
+from pandera.typing import Series
+
 
 class SKURef(pa.DataFrameModel):
     store_id: Series[int] = Field(ge=0)

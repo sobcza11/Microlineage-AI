@@ -1,0 +1,10 @@
+thresholds:
+  psi_max: 0.10
+  uplift_min: 0.0
+rules:
+  - name: drift_pass
+    condition: "psi <= thresholds.psi_max"
+  - name: uplift_nonnegative
+    condition: "uplift >= thresholds.uplift_min"
+decision:
+  pass_if: ["drift_pass", "uplift_nonnegative"]

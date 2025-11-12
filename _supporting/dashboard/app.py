@@ -1,4 +1,6 @@
-import streamlit as st, pandas as pd, numpy as np
+import numpy as np
+import pandas as pd
+import streamlit as st
 
 st.set_page_config(page_title="MicroLineage AI", layout="wide")
 st.title("Market Health Index")

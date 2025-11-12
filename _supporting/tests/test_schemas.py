@@ -1,8 +1,9 @@
 import pandas as pd
-import pytest
+
 from _supporting.schemas.pos import POS, coerce_utc
-from _supporting.schemas.weather import Weather
 from _supporting.schemas.ref import SKURef
+from _supporting.schemas.weather import Weather
+
 
 def test_pos_schema_header_only():
     df = pd.DataFrame(columns=["store_id","sku_id","ts","qty","price","promo_flag","stock_out_flag"])

@@ -1,6 +1,6 @@
+
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import Dict
 
 app = FastAPI(title="MicroLineage AI")
 
@@ -8,7 +8,7 @@ class ForecastRequest(BaseModel):
     store_id: str
     sku_id: str
     horizon_days: int = 14
-    context: Dict = {}
+    context: dict = {}
 
 @app.get("/health")
 def health():
