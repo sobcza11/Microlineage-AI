@@ -2,6 +2,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.optimize import linprog
+import mlflow  # <-- import before using
 
 # ---------- paths ----------
 HERE = Path(__file__).resolve()
@@ -11,6 +12,11 @@ PROCESSED = DATA / "processed"
 IN_CSV = PROCESSED / "sku_forecast.csv"
 OUT_CSV = PROCESSED / "sku_optimized.csv"
 
+# ---------- mlflow tracking (configure once) ----------
+mlflow.set_tracking_uri("sqlite:///mlflow.db")
+mlflow.set_experiment("MicroLineage-PriceOptimization")
+
+# ---------- core logic ----------
 def optimize_prices(df, cost_col="cost", price_col="price", demand_col="forecast"):
     """
     Maximize total margin = Σ (price_i - cost_i) * demand_i
@@ -33,8 +39,7 @@ def optimize_prices(df, cost_col="cost", price_col="price", demand_col="forecast
     A_ub = [np.ones(n) / n]
     b_ub = [1.05 * price.mean()]
 
-    res = linprog(c, A_ub=A_ub, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq,
-                  bounds=bounds, method="highs")
+    res = linprog(c, A_ub=A_ub, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, bounds=bounds, method="highs")
     if not res.success:
         return None, res
 
@@ -61,17 +66,14 @@ if __name__ == "__main__":
     if optimized is None:
         raise RuntimeError(f"Optimization failed: {res.message}")
 
-    # ---------- MLflow lineage (best-effort; still write CSV if MLflow missing) ----------
+    # ---------- MLflow lineage (best-effort; still write CSV if logging fails) ----------
     baseline = float(((df["price"] - df["cost"]) * df["forecast"]).sum())
     after = float(optimized["optimized_margin"].sum())
     uplift = after - baseline
 
+    PROCESSED.mkdir(parents=True, exist_ok=True)
+
     try:
-        import mlflow
-
-        mlflow.set_tracking_uri("sqlite:///mlflow.db")
-        mlflow.set_experiment("MicroLineage-PriceOptimization")
-
         with mlflow.start_run(run_name="optimize_prices"):
             mlflow.log_param("bounds_pct", 0.10)
             mlflow.log_param("avg_price_cap_pct", 0.05)
@@ -79,12 +81,10 @@ if __name__ == "__main__":
             mlflow.log_metric("optimized_margin", after)
             mlflow.log_metric("uplift", uplift)
 
-            PROCESSED.mkdir(parents=True, exist_ok=True)
             optimized.to_csv(OUT_CSV, index=False)
             mlflow.log_artifact(str(OUT_CSV), artifact_path="artifacts")
     except Exception:
-        # Fallback if MLflow not available/configured
-        PROCESSED.mkdir(parents=True, exist_ok=True)
+        # Fallback: write CSV even if MLflow not configured
         optimized.to_csv(OUT_CSV, index=False)
 
     print(f"✅ Optimization complete. Wrote {OUT_CSV.relative_to(REPO)} ({len(optimized)} rows).")
