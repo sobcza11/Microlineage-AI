@@ -21,3 +21,7 @@ def test_optimizer_and_metrics():
         assert k in m
     assert m["uplift"] >= 0.0
     assert m["psi"] <= 0.10
+
+# append to .github/workflows/ci.yml
+- name: Run tests
+  run: pytest -q --disable-warnings
