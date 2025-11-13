@@ -10,9 +10,21 @@ PROCESSED = REPO / "_supporting" / "data" / "processed"
 forecast_file = PROCESSED / "sku_forecast.csv"
 optimized_file = PROCESSED / "sku_optimized.csv"
 
+# ---------- ensure data exists (self-healing) ----------
+if not forecast_file.exists() or not optimized_file.exists():
+    try:
+        # Run the same pipeline you use in CI / Docker build
+        subprocess.check_call(["python", "_supporting/data/make_sku_forecast.py"])
+        subprocess.check_call(["python", "_supporting/models/optimize_prices.py"])
+        subprocess.check_call(["python", "_supporting/reports/sanity_check.py"])
+    except Exception as e:
+        st.error(f"Failed to prepare data inside container: {e}")
+        raise
+
 # ---------- load ----------
 forecast = pd.read_csv(forecast_file)
 optimized = pd.read_csv(optimized_file)
+
 
 st.set_page_config(page_title="MicroLineage-AI | Forecast Dashboard", layout="wide")
 st.title("📊 MicroLineage-AI Forecast & Optimization Dashboard")
