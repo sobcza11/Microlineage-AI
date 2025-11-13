@@ -53,6 +53,15 @@ A release is considered *safe-to-show* when:
 
 ---
 
+## Run with Docker (one-line)
+
+If you have Docker installed, you can run the full MicroLineage-AI stack with:
+
+```bash
+docker run --rm -p 8501:8501 sobcza11/microlineage-ai:latest
+
+---
+
 # 💻 Local Run (Windows PowerShell)
 
 From the repo root:

@@ -14,4 +14,4 @@ RUN python _supporting/data/make_sku_forecast.py \
  && python _supporting/reports/sanity_check.py
 
 EXPOSE 8501
-CMD ["streamlit","run","_supporting/dashboards/forecast_dashboard.py","--server.port=8501","--server.address=0.0.0.0"]
+CMD ["streamlit","run","_supporting/dashboard/forecast_dashboard.py","--server.port=8501","--server.address=0.0.0.0"]
