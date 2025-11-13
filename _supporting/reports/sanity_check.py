@@ -40,3 +40,33 @@ out = {
 metrics_path = PROCESSED / "metrics.json"
 metrics_path.write_text(json.dumps(out, indent=2))
 print(f"\nWrote metrics → {metrics_path}")
+
+# --- Health metrics writer ----------------------------------------------------
+from pathlib import Path
+import json
+
+def write_health_metrics(
+    uplift_pct: float,
+    psi: float,
+    psi_threshold: float,
+    path: str = "_supporting/reports/health_metrics.json",
+) -> None:
+    """Persist key health metrics used by the Streamlit exec panel."""
+    metrics = {
+        "uplift_pct": float(uplift_pct),
+        "psi": float(psi),
+        "psi_threshold": float(psi_threshold),
+    }
+
+    p = Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(metrics, indent=2))
+
+
+if __name__ == "__main__":
+    # Use REAL computed values
+    uplift_pct = pct          # <-- REAL uplift percent
+    psi_threshold = 0.10      # <-- executive threshold
+    # psi already defined above in your script
+
+    write_health_metrics(uplift_pct, psi, psi_threshold)
