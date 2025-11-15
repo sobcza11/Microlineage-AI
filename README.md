@@ -87,6 +87,9 @@ Microlineage-AI/
 ├── pytest.ini
 └── conftest.py
 
+---
+
+
 # 🧱 Architecture
 flowchart LR
     subgraph DataSource[Micro-Market Data Sources]
