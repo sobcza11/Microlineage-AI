@@ -92,6 +92,7 @@ Microlineage-AI/
 
 
 # 🧱 Architecture
+```text
 flowchart LR
     subgraph DataSource[Micro-Market Data Sources]
         POS[POS / Transactions]
