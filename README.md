@@ -18,62 +18,128 @@
 
 # 🧭 Overview
 
-**MicroLineage-AI** models how localized data ecosystems reshape economic forecasting in the **Economy 4.0** era.
+Hyper-local retail demand forecasting & pricing optimization with **governance built in** — a small, opinionated sandbox for showing how CPMAI-aligned MLOps, drift monitoring, & lightweight model governance can work in practice.
 
-Built as a micro-economy “digital twin,” it blends:
-
-- real-time POS data
-- weather & mobility context
-- SKU-level demand forecasting
-- price-elasticity optimization
-- drift monitoring (PSI)
-- CPMAI Phase VI policy gates
-
-The outcome: a transparent, uplift-oriented pricing & forecasting system that quantifies **consumption resilience, elasticity, and signal économique** within hyper-local markets.
+> **Design intent:** Treat this repo as a **“micro-market control tower”** — small enough to reason about, rich enough to demonstrate real-world practices.
 
 ---
 
-# 🚀 Run & Governance Model
+## What MicroLineage-AI Does
 
-MicroLineage-AI is structured around a **governed delivery flow**:
+MicroLineage-AI is a governed analytics workflow for SKU-level retail:
 
-1. **Forecast Generation**
-2. **Price Optimization**
-3. **Sanity Check (Margin, Uplift, PSI)**
-4. **Policy Gate (CPMAI Phase VI)**
-5. **Dashboard Deployment**
+- **Forecasts SKU demand** on a rolling horizon.
+- **Optimizes prices & margin** from those forecasts.
+- **Validates inputs & outputs** using Pandera schemas.
+- **Monitors drift** (e.g., PSI) & surfaces a pass/fail policy gate.
+- **Publishes a Streamlit dashboard** for interactive exploration.
+- **Ships with CI & Docker**, so everything can be rebuilt deterministically.
 
-A release is considered *safe-to-show* when:
+It is intentionally structured as a **learning & demonstration environment**:
 
-| Condition | Meaning |
-|----------|---------|
-| **Uplift ≥ 0%** | Optimization never reduces baseline margin |
-| **PSI ≤ threshold** | No harmful distribution drift |
-| **Decision Gate: PASS** | Ready for executive consumption |
-
----
-
-## Run with Docker (one-line)
-
-If you have Docker installed, you can run the full MicroLineage-AI stack with:
-
-```bash
-docker run --rm -p 8501:8501 sobcza11/microlineage-ai:latest
+- Small, realistic pipeline.
+- Clear governance hooks.
+- Easy to extend with new models, features, or stores.
 
 ---
 
-# 💻 Local Run (Windows PowerShell)
+# 🔧 Project Layout
 
-From the repo root:
+Root is intentionally kept lean: infra & entry-points at the top, everything else in `_supporting/`.
 
-```powershell
-# 1) Activate virtual environment
-.\.venv\Scripts\Activate.ps1
+```text
+Microlineage-AI/
+│
+├── .github/workflows/          # CI: lint, tests, Docker build/publish
+├── tests/                      # Public tests
+├── _supporting/                # Application code, models, data, reports
+│   ├── assets/                 # Images/static assets
+│   ├── ci/                     # CI helper scripts
+│   ├── config/                 # Config (JSON/YAML)
+│   ├── dashboard/              # Streamlit apps
+│   │   ├── app_prototype.py
+│   │   └── forecast_dashboard.py
+│   ├── data/                   # Raw/interim/processed
+│   │   └── processed/          # Forecast & optimization outputs
+│   ├── governance/             # Policy gate & CPMAI logic
+│   ├── models/                 # Model training & optimization
+│   ├── reports/                # Drift & health metrics
+│   ├── schemas/                # Pandera schemas for data contracts
+│   ├── src/                    # Core logic utilities
+│   └── tools/                  # CLIs & helper scripts
+│
+├── microlineage/               # Python package: schemas, pipelines, utils
+│   ├── __init__.py
+│   └── schemas.py
+│
+├── Dockerfile                  # Container build
+├── Makefile                    # Lint, test, build targets
+├── README.md                   # You are here
+├── LICENSE                     # MIT
+│
+├── requirements.txt            # Runtime deps
+├── requirements-dev.txt        # Dev/test deps
+│
+├── .gitignore
+├── .gitattributes
+├── .pre-commit-config.yaml
+├── .ruffignore
+├── pytest.ini
+└── conftest.py
 
-# 2) Install dependencies
-pip install -r requirements.txt
+# 🧱 Architecture
+flowchart LR
+    subgraph DataSource[Micro-Market Data Sources]
+        POS[POS / Transactions]
+        Price[Price & Promo History]
+        Catalog[SKU Catalog]
+    end
 
-# 3) Launch dashboard (local dev)
-streamlit run _supporting/dashboards/forecast_dashboard.py `
-  --server.port=8502 `
-  --server.address=127.0.0.1
+    subgraph Ingest[Ingest & Preparation]
+        IngestRaw[Load raw data\n(CSV / Parquet / DB)]
+        Pandera[Validate with Pandera\n(Data Contract)]
+        Features[Feature engineering\nlags, seasonality, covariates]
+    end
+
+    subgraph Modeling[Forecasting & Optimization Engine]
+        ModelTrain[Train forecasting model\nSKU-level time-series]
+        MLflow[Log runs & metrics\nMLflow Tracking]
+        Forecast[Generate demand forecasts\nper SKU]
+        Optimize[Optimization engine\nprice elasticity & margin lift]
+    end
+
+    subgraph Governance[Governance & Drift Monitoring]
+        Tests[Pytest & CI]
+        Drift[Data drift checks\nPSI & sanity]
+        Policy[Policy Gate\nCPMAI-aligned]
+    end
+
+    subgraph Delivery[Delivery & Experience]
+        Streamlit[Governed Dashboard]
+        Reports[Forecast & drift reports]
+    end
+
+    subgraph Deploy[Deployability]
+        Docker[Docker Image]
+        CI[GitHub Actions: lint/tests/build]
+    end
+
+    POS --> IngestRaw
+    Price --> IngestRaw
+    Catalog --> IngestRaw
+
+    IngestRaw --> Pandera --> Features --> ModelTrain --> Forecast --> Optimize
+    ModelTrain --> MLflow
+
+    Features --> Drift
+    Drift --> Streamlit
+
+    ModelTrain --> Tests
+    Drift --> Tests
+    Tests --> CI
+
+    Forecast --> Streamlit
+    Optimize --> Streamlit
+    Streamlit --> Reports
+
+    Streamlit --> Docker --> CI
